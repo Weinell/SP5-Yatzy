@@ -8,8 +8,10 @@ public class Combinations {
         int[] tempArr = new int[5];
         tempArr = arr;
 
+//Sorting the dice array
         Arrays.sort(tempArr);
 
+//Looking for the highest pair
         for (int i = tempArr.length-1; i > 0; i--)
         {
             for (int j = i-1; j > 0; j--)
@@ -35,12 +37,12 @@ public class Combinations {
         {
             for (int j = i+1; j < arr.length; j++)
             {
-                if (arr[i] == arr[j] && foundPair == false)
+                if (arr[i] == arr[j] && foundPair == false) //Finds the first pair
                 {
                     sumFirstPair = arr[i] + arr[j];
                     foundPair = true;
 
-                } else if (arr[i] == arr[j] && foundPair == true && sumFirstPair != arr[i]*2)
+                } else if (arr[i] == arr[j] && foundPair == true && sumFirstPair != arr[i]*2) //Finds the second pair
                 {
                     sumSeconPair = arr[i] + arr[j];
                 }
@@ -48,7 +50,7 @@ public class Combinations {
 
             }
         }
-        if(sumTwoPair > 0 && sumSeconPair != 0)
+        if(sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pair or 0 if no two pairs exist.
         {
             return sumTwoPair;
         }else
