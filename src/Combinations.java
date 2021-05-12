@@ -14,7 +14,7 @@ public class Combinations {
 //Looking for the highest pair
         for (int i = tempArr.length-1; i > 0; i--)
         {
-            for (int j = i-1; j > 0; j--)
+            for (int j = i-1; j >= 0; j--)
             {
                 if (arr[i] == arr[j])
                 {
@@ -58,4 +58,29 @@ public class Combinations {
             return 0;
         }
     }
+
+    public int chance(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public int straight(int[] arr)
+    {
+        int sum = chance(arr);
+
+        for (int i = 0; i < arr.length-1; i++) {
+            for (int j = i+1; j < arr.length; j++) {
+
+                if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
+                    return sum;
+                }
+            }
+        }
+        return 0;
+    }
+
+
 }

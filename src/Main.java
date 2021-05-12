@@ -14,15 +14,18 @@ public class Main {
 //            System.out.println(num);
 //        }
 
-        dice.changeDice(0,0,1,1,0);
-        System.out.println(Arrays.toString(diceRoll));
-
+//        dice.changeDice(0,0,1,1,0);
+//        System.out.println(Arrays.toString(diceRoll));
+//
         Combinations comb = new Combinations();
-        int[] testArr = {1,5,3,5,3};
-
-        System.out.println(comb.onePair(testArr));
-
-       // System.out.println(comb.twoPair(testArr));
+//        int[] testArr = {1,1,3,4,2};
+//
+//        System.out.println(comb.onePair(testArr));
+        int [] testTwoPairPass = {5,2,4,5,2};
+        int [] testLargeStraightPass = {6,2,3,4,5}; // Return 20
+        System.out.println(comb.straight(testLargeStraightPass));
+        //System.out.println(comb.twoPair(testTwoPairPass));
+        // System.out.println(comb.twoPair(testArr));
 
     }
 }
