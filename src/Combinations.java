@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Combinations {
 
-    Scanner s = new Scanner();
+    //Scanner s = new Scanner();
 
     public int singles(int[] dice, int n) {
         int sum = 0;
@@ -17,30 +17,34 @@ public class Combinations {
         return sum;
     }
 
+    public int[] sortingDice(int[] dice) {
 
-    public int threeSame(int[] dice)    {
-        int sum = 0;
-
-        if (dice)
-
-        for (int die : dice)    {
-
-
-        }
-    }
-
-    public int three(int[] dice) {
-        int sum = 0;
         int[] tempArr = new int[6];
 
-        for(int i = 1; i < dice.length; i++) {
+        for (int value : dice) {
 
-            tempArr[dice[i-1]] = dice[i];
+            tempArr[value - 1] += value;
+
         }
 
-        System.out.println(tempArr);
-        return sum;
+        for (int n:tempArr) {
+            System.out.println(n);
+        }
+
+        return tempArr;
     }
 
+    public int nOfAKind(int[] dice, int n)   {
+
+        int[] tempArr = sortingDice(dice);
+
+        for (int d:tempArr) {
+
+            if (d/n == n) {
+                return d;
+            }
+        }
+        return 0;
+    }
 
 }
