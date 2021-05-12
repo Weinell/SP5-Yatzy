@@ -50,7 +50,7 @@ public class Combinations {
 
             }
         }
-        if(sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pair or 0 if no two pairs exist.
+        if(sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pairs or 0 if no two pairs exist.
         {
             return sumTwoPair;
         }else
