@@ -1,4 +1,11 @@
+import java.util.ArrayList;
+
 public class Dice {
+
+    ArrayList<Dice> dice = new ArrayList<>();
+
+
+
 
 
     public int[] diceArray(int numDice){
