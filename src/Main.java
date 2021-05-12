@@ -16,5 +16,13 @@ public class Main {
 
         dice.changeDice(0,0,1,1,0);
         System.out.println(Arrays.toString(diceRoll));
+
+        Combinations comb = new Combinations();
+        int[] testArr = {1,5,3,5,3};
+
+        System.out.println(comb.onePair(testArr));
+
+       // System.out.println(comb.twoPair(testArr));
+
     }
 }
