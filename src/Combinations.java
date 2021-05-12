@@ -28,23 +28,31 @@ public class Combinations {
         }
 
         for (int n:tempArr) {
-            System.out.println(n);
+            //System.out.println(n);
         }
 
         return tempArr;
     }
 
-    public int nOfAKind(int[] dice, int n)   {
+    public int nOfAKind(int[] dice, float n)   {
 
+        int sum = 0;
         int[] tempArr = sortingDice(dice);
 
-        for (int d:tempArr) {
+        for (int i = 0; i < tempArr.length; i++) {
 
-            if (d/n == n) {
-                return d;
+            if (tempArr[i]/n == i+1) {
+                sum = tempArr[i];
             }
+            else if (tempArr[i]/4 == i+1)    {
+                sum = tempArr[i]-i-1;
+            }
+            else if (tempArr[i]/5 == i+1)    {
+                sum = tempArr[i]-(i*2)-1;
+            }
+
         }
-        return 0;
+        return sum;
     }
 
 }

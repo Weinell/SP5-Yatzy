@@ -19,15 +19,19 @@ public class Main {
 
         Combinations c = new Combinations();
 
-        System.out.println(c.singles(diceRoll, 1));
-        System.out.println(c.singles(diceRoll, 2));
-        System.out.println(c.singles(diceRoll, 3));
-        System.out.println(c.singles(diceRoll, 4));
-        System.out.println(c.singles(diceRoll, 5));
-        System.out.println(c.singles(diceRoll, 6));
+//        System.out.println(c.singles(diceRoll, 1));
+//        System.out.println(c.singles(diceRoll, 2));
+//        System.out.println(c.singles(diceRoll, 3));
+//        System.out.println(c.singles(diceRoll, 4));
+//        System.out.println(c.singles(diceRoll, 5));
+//        System.out.println(c.singles(diceRoll, 6));
+
+        int[] diceTest = new int[]{1,1,1,1,1};
 
         //c.sortingDice(diceRoll);
-        //System.out.println(c.nOfAKind(diceRoll, 3));
+        System.out.println(c.nOfAKind(diceTest, 3));
+        System.out.println(c.nOfAKind(diceTest, 4));
+        System.out.println(c.nOfAKind(diceTest, 5));
 
     }
 }
