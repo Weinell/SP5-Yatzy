@@ -24,6 +24,16 @@ public class Combinations {
         return 0;
     }
 
+    public int gotYatzy(int[] diceRoll) {   // n is how many kinds we are looking for.
+        int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
+        for (int i = 1; i < arr.length + 1; i++) {
+            if (arr[i - 1] == i * 5) {
+                return 50;
+            }
+        }
+        return 0;
+    }
+
     public int fullHouse(int[] diceRoll) {
         int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
         for (int i = 1; i < arr.length + 1; i++) {
