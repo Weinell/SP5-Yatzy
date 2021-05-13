@@ -1,66 +1,83 @@
-import java.util.Scanner;
-
 public class Combinations {
-
-    //Scanner s = new Scanner();
 
     public int singles(int[] diceRoll, int n) {
         int sum = 0;
-
         for (int die : diceRoll) {
-
             if (die == n) {
-
                 sum += n;
             }
         }
         return sum;
     }
 
-
-    public int nOfAKind(int[] diceRoll, int n) {    // n er antal 'ens' vi checker for. F.eks. 3 ens.
-
-        int[] arr = sortingDice(diceRoll);    // Først sortere denne metode de fem terninge kast og smider dem ind i denne temp array.
-                                                // Se eventuelt sortingDice metoden længere nede.
-
-        for (int i = 1; i < arr.length + 1; i++) {  // arr består af 6 tal. Værdierne fra 1 til 6 og hvor mange point
-                                                    // de hver især har opnået ved diceRoll. F.eks 3 femmer: arr[4] = 15
-
-            if (arr[i - 1] == i*n) {     // i er sat til 1 (normalt 0), som repræsentere antal øjne på terningen.
-                                         // Hvis arr[5-1] == 5 * 3 (sandt i dette tilfælde). Så:
-                return i * n;    // Returnes værdien for i(antal øjne) gange med n(antal ens).   5 * 3 = 15
-
-            } else if (arr[i - 1] == i*(n+1)) {   // Dette checker hvis der derimod var 4 femmer, men vi stadig kun søger 3 ens i dette tilfælde.
-
-                return i * n;             // metoden skal stadig kun returner 5 * 3 = 15. Da vi ønsker at udfylde feltet for 3 ens.
-
-            } else if (arr[i - 1] == i*(n+2)) {   // Og her er det for 5 femmer, men vi stadig kun søger 3 ens i dette tilfælde.
-
-                return i * n;             // metoden skal stadig kun returner 5 * 3 = 15. Da vi ønsker at udfylde feltet for 3 ens.
+    public int nOfAKind(int[] diceRoll, int n) {   // n is how many kinds we are looking for.
+        int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
+        for (int i = 1; i < arr.length + 1; i++) {
+            if (arr[i - 1] == i * n) {
+                return i * n;
+            } else if (arr[i - 1] == i * (n + 1)) { // This makes sure if n + 1 is true, it still only return the value of n
+                return i * n;
+            } else if (arr[i - 1] == i * (n + 2)) { // The same with n + 2
+                return i * n;
             }
         }
         return 0;
     }
 
-    public int[] sortingDice(int[] unSortedDice) {
-
-        // eksempel på sortering:  int[]={2,2,6,6,4};
-        // arr[0] = 0     (1'ere)
-        // arr[1] = 4     (2'ere)
-        // arr[2] = 0     (3'ere)
-        // arr[3] = 4     (4'ere)
-        // arr[4] = 0     (5'ere)
-        // arr[5] = 12    (6'ere)
-
-        int[] arr = new int[6];
-
-        for (int value : unSortedDice) {   // Hver terningkast har en value fra 1 til 6.
-
-            arr[value - 1] += value;  // eksempel unSortedDice[2] = 6. Derfor: arr[6-1] += 6
-
+    public int fullHouse(int[] diceRoll) {
+        int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
+        for (int i = 1; i < arr.length + 1; i++) {
+            if (arr[i - 1] == i * 5) {
+                return 0;
+            } else if (arr[i - 1] == i * 4) {
+                return 0;
+            } else if (arr[i - 1] == i * 3) {
+                // If there is exactly 3 of a kinds. Then it checks if there is exactly 2 of a kind of any other values.
+                for (int j = 1; j < arr.length + 1; j++) {
+                    if (arr[j - 1] == j * 2) {
+                        return (i * 3) + (j * 2);
+                    }
+                }
+            }
         }
-
-        return arr;
+        return 0;
     }
 
+    public int smallStraight(int[] diceRoll) {
+        int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] == i) {
+                if (arr[4] == i) {
+                    return 15;
+                }
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    public int largeStraight(int[] diceRoll) {
+        int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == i + 1) {
+                if (arr[5] == i + 1) {
+                    return 20;
+                }
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+
+    public int[] sortingDice(int[] unSortedDice) {
+        // The dice gets sorted into separate values 1 - 6.
+        int[] arr = new int[6];
+        for (int value : unSortedDice) {
+            arr[value - 1] += value;
+        }
+        return arr;
+    }
 }
