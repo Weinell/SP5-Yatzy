@@ -30,7 +30,7 @@ public class Combinations {
         int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
         for (int i = 1; i < arr.length + 1; i++) {
             if (arr[i - 1] == i * 5) {
-                return 50;
+                return 50 + chance(diceRoll);
             }
         }
         return 0;
