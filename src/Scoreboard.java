@@ -17,6 +17,15 @@ public class Scoreboard {
 
     }
 
+    // Used in UI
+    public void addPoints(int playerID, int[] valueAndCombi) {
+
+        scoreboard[playerID].setScores(valueAndCombi[1], valueAndCombi[0]);
+        subSum();
+        totalSum();
+    }
+
+    // We need this for GUI
     public void addPoints(int playerID, int combination, int points) {
 
         scoreboard[playerID].setScores(combination,points);
