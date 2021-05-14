@@ -2,16 +2,17 @@ public class Player {
 
 
     String name;
-    int score;
     int ID;
+    int score;
 
-    public Player(String name, int score, int ID) {
+    public Player(String name, int ID, int score) {
 
         this.name = name;
-        this.score = score;
         this.ID = ID;
+        this.score = score;
+
     }
 
-    
+
 
 }
