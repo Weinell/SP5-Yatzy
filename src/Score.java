@@ -35,8 +35,12 @@ public class Score {
         return scores;
     }
 
-    public void setScores(int[] scores) {
-        this.scores = scores;
+    public int getScores(int combination)  {
+        return scores[combination];
+    }
+
+    public void setScores(int combination, int value) {
+        this.scores[combination] = value;
     }
 
     @Override

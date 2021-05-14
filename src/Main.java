@@ -75,9 +75,14 @@ public class Main {
 //        System.out.println("Chance: " + c.chance(diceRoll) );
 //        System.out.println("Yatzy: " + c.gotYatzy(diceRoll));
 
-        Scoreboard s = new Scoreboard(6);
+        Scoreboard s = new Scoreboard(2);
         System.out.println(s);
 
+        s.addPoints(1,0,4);
+        s.addPoints(1,2,9);
+        s.addPoints(1,5,24);
+        s.addPoints(1,15,24);
+        System.out.println(s);
 
 
     }
