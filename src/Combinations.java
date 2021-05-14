@@ -67,6 +67,7 @@ public class Combinations {
         return sum;
     }
 
+<<<<<<< Updated upstream
     public int straight(int[] arr)
     {
         int sum = chance(arr);
@@ -84,3 +85,20 @@ public class Combinations {
 
 
 }
+=======
+//    public int straight(int[] arr)
+//    {
+//        int sum = chance(arr);
+//
+//        for (int i = 0; i < arr.length-1; i++) {
+//            for (int j = i+1; j < arr.length; j++) {
+//
+//                if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
+//                    return sum;
+//                }
+//            }
+//        }
+//        return 0;
+//    }
+}
+>>>>>>> Stashed changes
