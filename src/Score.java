@@ -45,6 +45,6 @@ public class Score {
 
     @Override
     public String toString() {
-        return "\n Score" + Arrays.toString(scores);
+        return "\n Player " + "Score" + Arrays.toString(scores);
     }
 }
