@@ -5,11 +5,11 @@ public class Player {
     int ID;
     int score;
 
-    public Player(String name, int ID, int score) {
+    public Player(String name) {
 
         this.name = name;
-        this.ID = ID;
-        this.score = score;
+        this.ID = 0;
+        this.score = 0;
 
     }
 
