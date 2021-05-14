@@ -1,18 +1,33 @@
 public class Player {
+    private String name;
+    private int score;
 
-
-    String name;
-    int ID;
-    int score;
-
-    public Player(String name) {
-
+    public Player (String name)
+    {
         this.name = name;
-        this.ID = 0;
         this.score = 0;
-
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
