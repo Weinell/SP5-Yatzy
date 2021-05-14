@@ -7,12 +7,12 @@ public class Scoreboard {
 
     private Score[] scoreboard;
 
-    public Scoreboard(int numPlayers) {
+    public Scoreboard(int numPlayers, ArrayList<Player> players) {
 
         scoreboard = new Score[numPlayers];
         for (int i = 0; i < scoreboard.length; i++) {
 
-            scoreboard[i] = new Score();
+            scoreboard[i] = new Score(players.get(i).getName());
         }
 
     }
