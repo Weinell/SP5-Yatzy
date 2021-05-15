@@ -82,7 +82,7 @@ public class GameEngine {
             //System.out.println(player.getName() + "'s turn");
             int[] valueAndCombi = new int[2];  // Used for adding the score to the board
 
-            int turn = 1;
+            int turn = 1; //TODO: Maybe call the variables roll and rolls left - not to misinterpret with turn?
             int turnsLeft = 3;
             while (turnsLeft != 0) {
                 switch (getUserInt("\nChoices: \n\n 1. Roll Dice \n 2. Add score to board \n 3. Print Scoreboard \n\ninput: ")) {
@@ -98,11 +98,14 @@ public class GameEngine {
                                 changeDice(i);
                             }
                         }
+
+
                         turnsLeft--;
                         turn++;
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
                         System.out.println("Turnsleft: " + turnsLeft);
 
+// TODO: Suggestion: we could put this in a helper method to simplify the doTurn method.
                         if (turnsLeft == 0) {
                             valueAndCombi = combi.eventCombination(fiveDice);
                             scoreboard.addPoints(currentPlayer, valueAndCombi);
@@ -114,7 +117,7 @@ public class GameEngine {
 
                     case 2:
                         System.out.println("Adding result to scoreboard");
-
+//TODO: Same as line 108 - it could be an update scoreboard method?
                         valueAndCombi = combi.eventCombination(fiveDice);
                         scoreboard.addPoints(currentPlayer, valueAndCombi);
                         System.out.println(scoreboard);
