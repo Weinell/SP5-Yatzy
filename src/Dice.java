@@ -1,69 +1,41 @@
 public class Dice {
-    int[] fiveDice = new int[5];
 
-    //Rewrite with for loop and use input from user -
-    public void changeDice(int diceNum)
-    {
+    private int value;
+    private boolean locked;    // Not used yet.
 
-        for (int i =0; i <5; i++){
-            if (diceNum == i) {
-                fiveDice[i] = diceRoll();
-            }
-
+    public Dice() {
+        value = diceRoll();
+        locked = false;
     }
-//        if(diceNum == 1)
-//        {
-//            fiveDice[0] = diceRoll();
-//        }else
-//        {
-//            System.out.println("Dice 1 is unchanged");
-//        }
-//        if(b == true)
-//        {
-//            fiveDice[1] = diceRoll();
-//        }else
-//        {
-//            System.out.println("Dice 2 is unchanged");
-//        }
-//        if(c == true)
-//        {
-//            fiveDice[2] = diceRoll();
-//        }else
-//        {
-//            System.out.println("Dice 3 is unchanged");
-//        }
-//        if(d == true)
-//        {
-//            fiveDice[3] = diceRoll();
-//        }else
-//        {
-//            System.out.println("Dice 4 is unchanged");
-//        }
-//        if(e == true)
-//        {
-//            fiveDice[4] = diceRoll();
-//        }else
-//        {
-//            System.out.println("Dice 5 is unchanged");
-//        }
 
-
+    public Dice(int value, boolean locked) {
+        this.value = value;
+        this.locked = locked;
     }
 
 
-    public int[] diceArray(int numDice){
-
-        for(int i = 0; i < numDice; i++)
-        {
-            fiveDice[i] = diceRoll();
-        }
-        return fiveDice;
+    public static int diceRoll() {
+        return(int)(Math.random()*6+1);
     }
 
-    public int diceRoll()
-    {
-        int diceRoll = (int)(Math.random()*6+1);
-        return diceRoll;
+    @Override
+    public String toString() {
+        return Integer.toString(value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
 }

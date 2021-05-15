@@ -2,10 +2,59 @@ import java.util.Arrays;
 
 public class Combinations {
 
-    public int singles(int[] diceRoll, int n) {
+    private GameEngine gameEngine;
+
+    public Combinations(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+    }
+
+    public int[] eventCombination(Dice[] diceRoll) {
+        int[] valueAndCombi = new int[2];
+
+        System.out.println(Arrays.toString(gameEngine.getFiveDice()));
+        System.out.println("\nWhat do you wish to do? ");
+        String input = gameEngine.getUserString("\n" +
+                "1) Aces " + "\n" +
+                "2) Twos " + "\n" +
+                "3) Threes " + "\n" +
+                "4) Fours " + "\n" +
+                "5) Fives " + "\n" +
+                "6) Sixes " + "\n" +
+
+
+                "\nChoose action: ");
+        System.out.println("\n======================================\n");
+        valueAndCombi[0] = getCombination(input, diceRoll);
+        valueAndCombi[1] = Integer.parseInt(input)-1;
+        return valueAndCombi;
+
+    }
+
+
+    private int getCombination(String input, Dice[] diceRoll) {
+        int output = 0;
+        switch (input) {
+            case "1" -> output = singles(diceRoll, 1);
+            case "2" -> output = singles(diceRoll, 2);
+            case "3" -> output = singles(diceRoll, 3);
+            case "4" -> output = singles(diceRoll, 4);
+            case "5" -> output = singles(diceRoll, 5);
+            case "6" -> output = singles(diceRoll, 6);
+
+
+        }
+        return output;
+    }
+
+
+
+
+
+
+    public int singles(Dice[] diceRoll, int n) {
         int sum = 0;
-        for (int die : diceRoll) {
-            if (die == n) {
+        for (Dice die : diceRoll) {
+            if (die.getValue() == n) {
                 sum += n;
             }
         }
@@ -93,8 +142,7 @@ public class Combinations {
         return arr;
     }
 
-    public int onePair(int[] arr)
-    {
+    public int onePair(int[] arr) {
         int[] tempArr = new int[5];
         tempArr = arr;
 
@@ -102,12 +150,9 @@ public class Combinations {
         Arrays.sort(tempArr);
 
 //Looking for the highest pair
-        for (int i = tempArr.length-1; i > 0; i--)
-        {
-            for (int j = i-1; j >= 0; j--)
-            {
-                if (arr[i] == arr[j])
-                {
+        for (int i = tempArr.length - 1; i > 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (arr[i] == arr[j]) {
                     return arr[i] + arr[j];
                 }
             }
@@ -116,35 +161,31 @@ public class Combinations {
     }
 
 
-    public int twoPair(int[] arr)
-    {
+    public int twoPair(int[] arr) {
         int sumFirstPair = 0;
         int sumSeconPair = 0;
         int sumTwoPair = 0;
         boolean foundPair = false;
 
-        for (int i = 0; i < arr.length - 1; i++)
-        {
-            for (int j = i+1; j < arr.length; j++)
-            {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] == arr[j] && foundPair == false) //Finds the first pair
                 {
                     sumFirstPair = arr[i] + arr[j];
                     foundPair = true;
 
-                } else if (arr[i] == arr[j] && foundPair == true && sumFirstPair != arr[i]*2) //Finds the second pair
+                } else if (arr[i] == arr[j] && foundPair == true && sumFirstPair != arr[i] * 2) //Finds the second pair
                 {
                     sumSeconPair = arr[i] + arr[j];
                 }
-                sumTwoPair = sumFirstPair+sumSeconPair;
+                sumTwoPair = sumFirstPair + sumSeconPair;
 
             }
         }
-        if(sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pairs or 0 if no two pairs exist.
+        if (sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pairs or 0 if no two pairs exist.
         {
             return sumTwoPair;
-        }else
-        {
+        } else {
             return 0;
         }
     }
@@ -157,12 +198,11 @@ public class Combinations {
         return sum;
     }
 
-    public int straight(int[] arr)
-    {
+    public int straight(int[] arr) {
         int sum = chance(arr);
 
-        for (int i = 0; i < arr.length-1; i++) {
-            for (int j = i+1; j < arr.length; j++) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
 
                 if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
                     return sum;

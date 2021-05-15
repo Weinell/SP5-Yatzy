@@ -7,16 +7,25 @@ public class Scoreboard {
 
     private Score[] scoreboard;
 
-    public Scoreboard(int numPlayers) {
+    public Scoreboard(int numPlayers, ArrayList<Player> players) {
 
         scoreboard = new Score[numPlayers];
         for (int i = 0; i < scoreboard.length; i++) {
 
-            scoreboard[i] = new Score();
+            scoreboard[i] = new Score(players.get(i).getName());
         }
 
     }
 
+    // Used in UI
+    public void addPoints(int playerID, int[] valueAndCombi) {
+
+        scoreboard[playerID].setScores(valueAndCombi[1], valueAndCombi[0]);
+        subSum();
+        totalSum();
+    }
+
+    // We need this for GUI
     public void addPoints(int playerID, int combination, int points) {
 
         scoreboard[playerID].setScores(combination,points);

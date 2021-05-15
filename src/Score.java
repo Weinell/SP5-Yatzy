@@ -24,10 +24,12 @@ public class Score {
      */
 
     private int[] scores;
+    private String nameOfPlayer;
 
-    public Score()  {
+    public Score(String nameOfPlayer)  {
 
         scores = new int[18];
+        this.nameOfPlayer = nameOfPlayer;
 
     }
 
@@ -45,6 +47,6 @@ public class Score {
 
     @Override
     public String toString() {
-        return "\n Player " + "Score" + Arrays.toString(scores);
+        return "\n" + nameOfPlayer + ": Score" + Arrays.toString(scores);
     }
 }

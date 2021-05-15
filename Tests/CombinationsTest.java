@@ -3,8 +3,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CombinationsTest {
-    Combinations comb = new Combinations();
-    int [] testSmallStraightPass = {6,6,1,1,1}; //Return 15
+    Combinations comb = new Combinations(null);
+    int [] testSmallStraightPass = {1,2,3,4,5}; //Return 15
     int [] testLargeStraightPass = {6,2,3,4,5}; // Return 20
     int [] testOnePairPass = {1,5,4,3,1}; //Sum 2;
     int [] testFailArray = {1,2,5,4,6}; // Return 0 (Chance returns 18)
