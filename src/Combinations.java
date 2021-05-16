@@ -15,32 +15,30 @@ public class Combinations {
     public int[] eventCombination(Dice[] diceRoll, int playerID) {
         System.out.println(Arrays.toString(gameEngine.getFiveDice()));
         System.out.println("\nWhat do you wish to do? ");
-        String input = gameEngine.getUserString("\n" +
-                " 1.  Aces " + "\n" +
-                " 2.  Twos " + "\n" +
-                " 3.  Threes " + "\n" +
-                " 4.  Fours " + "\n" +
-                " 5.  Fives " + "\n" +
-                " 6.  Sixes " + "\n" +
-                "     sum  " + "\n" +
-                "     Bonus  " + "\n" +
-                " 9.  One pair " + "\n" +
-                " 10. Two pair " + "\n" +
-                " 11. 3 of a kind " + "\n" +
-                " 12. 4 of a kind " + "\n" +
-                " 13. Small straight " + "\n" +
-                " 14. Large straight " + "\n" +
-                " 15. 3 of a kind " + "\n" +
-                " 16. 4 of a kind " + "\n" +
-                " 17. Full house " + "\n" +
-                " 18. Chance " + "\n" +
-                " 19. Yatzy " + "\n" +
+        String input = gameEngine.getUserString("""
 
+                 1.  Aces\s
+                 2.  Twos\s
+                 3.  Threes\s
+                 4.  Fours\s
+                 5.  Fives\s
+                 6.  Sixes\s
+                     sum \s
+                     Bonus \s
+                 9.  One pair\s
+                 10. Two pair\s
+                 11. 3 of a kind\s
+                 12. 4 of a kind\s
+                 13. Small straight\s
+                 14. Large straight\s
+                 15. Full house\s
+                 16. Chance\s
+                 17. Yatzy\s
 
-                "\nChoices: ");
+                Choices:\s""");
 
         valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
-        valueAndCombi[1] = Integer.parseInt(input)-1;
+        valueAndCombi[1] = Integer.parseInt(input)-1;     // Combination
         return valueAndCombi;
 
     }
@@ -48,11 +46,10 @@ public class Combinations {
 
     private int getCombination(String input, Dice[] diceRoll, int playerID) {
         int output = 0;
-//        Score[] arr = scoreboard.getScoreboard();
-//        if(arr[playerID].getScores())
 
+        // The tempSF loads the field the player wants to add score to.
         ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(Integer.parseInt(input)-1);
-        System.out.println("Is it already used?" + tempSF.isAlreadyUsed());
+        // This if statement makes sure not to add the score if the field has already been used.
         if (!tempSF.isAlreadyUsed()) {
             switch (input) {
                 case "1" -> output = singles(diceRoll, 1);
@@ -61,6 +58,8 @@ public class Combinations {
                 case "4" -> output = singles(diceRoll, 4);
                 case "5" -> output = singles(diceRoll, 5);
                 case "6" -> output = singles(diceRoll, 6);
+
+                // TODO the rest of the combinations
 
 
             }
@@ -73,11 +72,6 @@ public class Combinations {
         }
         return output;
     }
-
-
-
-
-
 
     public int singles(Dice[] diceRoll, int n) {
         int sum = 0;

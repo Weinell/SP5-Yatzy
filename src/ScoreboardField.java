@@ -2,6 +2,7 @@ public class ScoreboardField {
     private int value;
     private boolean alreadyUsed;
 
+    // The default field on the scoreboard should always be blank.
     public ScoreboardField() {
         value = 0;
         alreadyUsed = false;

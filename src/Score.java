@@ -23,9 +23,8 @@ public class Score {
     sum
      */
 
-    private ScoreboardField[] scores;
-    private String nameOfPlayer;
-
+    private final ScoreboardField[] scores;   // Instead of just an int array, we made a new class for each field, so we can lock the position etc.
+    private final String nameOfPlayer;
 
     public Score(String nameOfPlayer)  {
 
@@ -34,15 +33,9 @@ public class Score {
             scores[i] = new ScoreboardField();
         }
         this.nameOfPlayer = nameOfPlayer;
-
-
     }
 
-    public ScoreboardField[] getScores() {
-        return scores;
-    }
-
-    public ScoreboardField getScores(int combination)  {
+    public ScoreboardField getScores(int combination)  {   // Gets a specific players scores. Instead of the all the player's.
         return scores[combination];
     }
 
@@ -50,7 +43,6 @@ public class Score {
         this.scores[combination].setValue(value);
         this.scores[combination].setAlreadyUsed(true);
     }
-
 
     @Override
     public String toString() {

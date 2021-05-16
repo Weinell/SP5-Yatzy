@@ -6,7 +6,9 @@ public class GameEngine {
 
     private final Dice[] fiveDice;  // Moved fiveDice from the class to Game Engine. So we can make new dice objects.
     private static final ArrayList<Player> players = new ArrayList<>();
-    private int numberOfPlayers, currentPlayer;
+
+    private int numberOfPlayers, currentPlayer; // Needed to determind whom turn it is and whom to added the right scores to.
+
     private Scoreboard scoreboard;
     private Combinations combi;
 
@@ -15,7 +17,7 @@ public class GameEngine {
         for (int i = 0; i < fiveDice.length; i++) {
             fiveDice[i] = new Dice();
         }
-        currentPlayer = 0;
+        currentPlayer = 0;  // Always sets it to the first player in the array when starting a new game.
 
     }
 
@@ -39,6 +41,7 @@ public class GameEngine {
         initialMenu();
     }
 
+    // TODO: Make sure the game doesnt crash when we use char input instead of int. And vice versa.
     //Initial menu presented to player
     public void initialMenu() {
         int menuChoice = getUserInt("Welcome to Yatzy! Make your choice: \n\n 1. Start new game \n 2. Continue game \n 3. Exit \n 4. Roll Dice\n\ninput: ");
@@ -71,28 +74,30 @@ public class GameEngine {
 
     public void doTurn() //input player object
     {
-        while (true) {
+        while (true) {   // TODO: Make a game is running boolean. incase we need the ability to start a new game.
 
-            if(currentPlayer==numberOfPlayers) currentPlayer = 0;
+            if(currentPlayer==numberOfPlayers) currentPlayer = 0;   // When the last player had his turn, currentplayer is set to player 1.
 
             for (int i = 0; i < fiveDice.length; i++) {
                 fiveDice[i] = new Dice();
             }
 
-            //System.out.println(player.getName() + "'s turn");
-            int[] valueAndCombi = new int[2];  // Used for adding the score to the board
+            int[] valueAndCombi;  // Used for adding the score to the board. Smart way to send two integers in the same variable.
 
-            int turn = 1;
-            int turnsLeft = 3;
+            int turn = 1;   // Resets to this default each player round.
+            int turnsLeft = 3;  // Makes sure player can only roll three times.
             while (turnsLeft != 0) {
                 System.out.println("\n" + players.get(currentPlayer).getName() + " turn:");
-                switch (getUserInt("\nChoices: \n\n 1. Roll Dice \n 2. Add score to board \n 3. Print Scoreboard \n\ninput: ")) {
-                    case 1:
-//                    Dice[] diceArr = diceArray(5);
 
+                switch (getUserInt("\n" +
+                        "Choices: \n\n " +
+                        "1. Roll Dice \n " +
+                        "2. Add score to board \n " +
+                        "3. Print Scoreboard \n\n" +
+                        "input: ")) {
+                    case 1 -> {
                         System.out.println("\nTurn " + turn + ":");
                         System.out.println(Arrays.toString(fiveDice) + "\n");
-
                         for (int i = 0; i < 5; i++) {
                             String input = getUserString("Do you want to re-roll dice no. " + (i + 1) + " Y/N ");
                             if (input.equalsIgnoreCase("y")) {
@@ -104,27 +109,22 @@ public class GameEngine {
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
                         System.out.println("Turnsleft: " + turnsLeft);
 
-                        if (turnsLeft == 0) {
-                            valueAndCombi = combi.eventCombination(fiveDice, currentPlayer);
+                        if (turnsLeft == 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
+                            valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.
                             scoreboard.addPoints(currentPlayer, valueAndCombi);
                             System.out.println(scoreboard);
-                            currentPlayer++;
+                            currentPlayer++;  // Next players turn
                         }
-
-                        break;
-
-                    case 2:
+                    }
+                    case 2 -> {
                         System.out.println("Adding result to scoreboard");
-
-                        valueAndCombi = combi.eventCombination(fiveDice, currentPlayer);
+                        valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.
                         scoreboard.addPoints(currentPlayer, valueAndCombi);
                         System.out.println(scoreboard);
                         turnsLeft = 0;
                         currentPlayer++;
-
-                        break;
-                    case 3:
-                        System.out.println(scoreboard);
+                    }
+                    case 3 -> System.out.println(scoreboard);
                 }
             }
         }
@@ -144,14 +144,12 @@ public class GameEngine {
     }
 
     //Takes number of players and fills players with names from input
-    private ArrayList<Player> makePlayerArray(int numberOfPlayers) {
+    private void makePlayerArray(int numberOfPlayers) {
         for (int i = 0; i < numberOfPlayers; i++) {
             String nameOfPlayer = getUserString("Enter Player name: ");
             Player player = new Player(nameOfPlayer);
             players.add(player);
         }
-
-        return players;
     }
 
     //Rewrite with for loop and use input from user -
