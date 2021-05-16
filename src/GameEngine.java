@@ -85,6 +85,7 @@ public class GameEngine {
             int turn = 1;
             int turnsLeft = 3;
             while (turnsLeft != 0) {
+                System.out.println("\n" + players.get(currentPlayer).getName() + " turn:");
                 switch (getUserInt("\nChoices: \n\n 1. Roll Dice \n 2. Add score to board \n 3. Print Scoreboard \n\ninput: ")) {
                     case 1:
 //                    Dice[] diceArr = diceArray(5);
@@ -104,7 +105,7 @@ public class GameEngine {
                         System.out.println("Turnsleft: " + turnsLeft);
 
                         if (turnsLeft == 0) {
-                            valueAndCombi = combi.eventCombination(fiveDice);
+                            valueAndCombi = combi.eventCombination(fiveDice, currentPlayer);
                             scoreboard.addPoints(currentPlayer, valueAndCombi);
                             System.out.println(scoreboard);
                             currentPlayer++;
@@ -115,7 +116,7 @@ public class GameEngine {
                     case 2:
                         System.out.println("Adding result to scoreboard");
 
-                        valueAndCombi = combi.eventCombination(fiveDice);
+                        valueAndCombi = combi.eventCombination(fiveDice, currentPlayer);
                         scoreboard.addPoints(currentPlayer, valueAndCombi);
                         System.out.println(scoreboard);
                         turnsLeft = 0;
@@ -136,7 +137,7 @@ public class GameEngine {
         makePlayerArray(numbPlayers); //returns players arraylist
         numberOfPlayers = numbPlayers;
         scoreboard = new Scoreboard(numbPlayers, players);
-        combi = new Combinations(this);
+        combi = new Combinations(this, scoreboard);
 
         //Start round?
         doTurn();

@@ -3,45 +3,73 @@ import java.util.Arrays;
 public class Combinations {
 
     private GameEngine gameEngine;
+    private Scoreboard scoreboard;
+    int[] valueAndCombi;
 
-    public Combinations(GameEngine gameEngine) {
+    public Combinations(GameEngine gameEngine, Scoreboard scoreboard) {
         this.gameEngine = gameEngine;
+        this.scoreboard = scoreboard;
+        this.valueAndCombi = new int[2];  // This way you can return different values in the same return methode
     }
 
-    public int[] eventCombination(Dice[] diceRoll) {
-        int[] valueAndCombi = new int[2];
-
+    public int[] eventCombination(Dice[] diceRoll, int playerID) {
         System.out.println(Arrays.toString(gameEngine.getFiveDice()));
         System.out.println("\nWhat do you wish to do? ");
         String input = gameEngine.getUserString("\n" +
-                "1) Aces " + "\n" +
-                "2) Twos " + "\n" +
-                "3) Threes " + "\n" +
-                "4) Fours " + "\n" +
-                "5) Fives " + "\n" +
-                "6) Sixes " + "\n" +
+                " 1.  Aces " + "\n" +
+                " 2.  Twos " + "\n" +
+                " 3.  Threes " + "\n" +
+                " 4.  Fours " + "\n" +
+                " 5.  Fives " + "\n" +
+                " 6.  Sixes " + "\n" +
+                "     sum  " + "\n" +
+                "     Bonus  " + "\n" +
+                " 9.  One pair " + "\n" +
+                " 10. Two pair " + "\n" +
+                " 11. 3 of a kind " + "\n" +
+                " 12. 4 of a kind " + "\n" +
+                " 13. Small straight " + "\n" +
+                " 14. Large straight " + "\n" +
+                " 15. 3 of a kind " + "\n" +
+                " 16. 4 of a kind " + "\n" +
+                " 17. Full house " + "\n" +
+                " 18. Chance " + "\n" +
+                " 19. Yatzy " + "\n" +
 
 
-                "\nChoose action: ");
-        System.out.println("\n======================================\n");
-        valueAndCombi[0] = getCombination(input, diceRoll);
+                "\nChoices: ");
+
+        valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
         valueAndCombi[1] = Integer.parseInt(input)-1;
         return valueAndCombi;
 
     }
 
 
-    private int getCombination(String input, Dice[] diceRoll) {
+    private int getCombination(String input, Dice[] diceRoll, int playerID) {
         int output = 0;
-        switch (input) {
-            case "1" -> output = singles(diceRoll, 1);
-            case "2" -> output = singles(diceRoll, 2);
-            case "3" -> output = singles(diceRoll, 3);
-            case "4" -> output = singles(diceRoll, 4);
-            case "5" -> output = singles(diceRoll, 5);
-            case "6" -> output = singles(diceRoll, 6);
+//        Score[] arr = scoreboard.getScoreboard();
+//        if(arr[playerID].getScores())
+
+        ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(Integer.parseInt(input)-1);
+        System.out.println("Is it already used?" + tempSF.isAlreadyUsed());
+        if (!tempSF.isAlreadyUsed()) {
+            switch (input) {
+                case "1" -> output = singles(diceRoll, 1);
+                case "2" -> output = singles(diceRoll, 2);
+                case "3" -> output = singles(diceRoll, 3);
+                case "4" -> output = singles(diceRoll, 4);
+                case "5" -> output = singles(diceRoll, 5);
+                case "6" -> output = singles(diceRoll, 6);
 
 
+            }
+        } else {
+            System.out.println("Already used");
+            output = tempSF.getValue();
+
+            valueAndCombi = eventCombination(diceRoll, playerID);
+            scoreboard.addPoints(playerID, valueAndCombi);
         }
         return output;
     }

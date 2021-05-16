@@ -41,7 +41,7 @@ public class Scoreboard {
 
             for (int j = 0; j < 6; j++) {
 
-                sum += scoreboard[i].getScores(j);
+                sum += scoreboard[i].getScores(j).getValue();
 
             }
             scoreboard[i].setScores(6,sum);
@@ -58,7 +58,7 @@ public class Scoreboard {
 
             for (int j = 6; j < 17; j++) {
 
-                sum += scoreboard[i].getScores(j);
+                sum += scoreboard[i].getScores(j).getValue();
 
             }
             scoreboard[i].setScores(17,sum);
@@ -71,6 +71,8 @@ public class Scoreboard {
     public Score[] getScoreboard() {
         return scoreboard;
     }
+
+
 
     public void setScoreboard(Score[] scoreboard) {
         this.scoreboard = scoreboard;

@@ -18,32 +18,39 @@ public class Score {
     smallstraight
     largestraight
     fullhouse
-    yatzy
     chance
+    Yatzy
     sum
      */
 
-    private int[] scores;
+    private ScoreboardField[] scores;
     private String nameOfPlayer;
+
 
     public Score(String nameOfPlayer)  {
 
-        scores = new int[18];
+        scores = new ScoreboardField[18];
+        for (int i = 0; i < scores.length; i++) {
+            scores[i] = new ScoreboardField();
+        }
         this.nameOfPlayer = nameOfPlayer;
+
 
     }
 
-    public int[] getScores() {
+    public ScoreboardField[] getScores() {
         return scores;
     }
 
-    public int getScores(int combination)  {
+    public ScoreboardField getScores(int combination)  {
         return scores[combination];
     }
 
     public void setScores(int combination, int value) {
-        this.scores[combination] = value;
+        this.scores[combination].setValue(value);
+        this.scores[combination].setAlreadyUsed(true);
     }
+
 
     @Override
     public String toString() {
