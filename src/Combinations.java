@@ -13,64 +13,70 @@ public class Combinations {
     }
 
     public int[] eventCombination(Dice[] diceRoll, int playerID) {
-        System.out.println(Arrays.toString(gameEngine.getFiveDice()));
-        System.out.println("\nWhat do you wish to do? ");
-        String input = gameEngine.getUserString("""
+        boolean validNumber = false;
+        while(!validNumber) {
+            System.out.println(Arrays.toString(gameEngine.getFiveDice()));
+            System.out.println("\nWhat do you wish to do? ");
+            int input = gameEngine.getUserInt("""
 
-                 1.  Aces\s
-                 2.  Twos\s
-                 3.  Threes\s
-                 4.  Fours\s
-                 5.  Fives\s
-                 6.  Sixes\s               
-                 9.  One pair\s
-                 10. Two pair\s
-                 11. 3 of a kind\s
-                 12. 4 of a kind\s
-                 13. Small straight\s
-                 14. Large straight\s
-                 15. Full house\s
-                 16. Chance\s
-                 17. Yatzy\s
+                     1.  Aces\s
+                     2.  Twos\s
+                     3.  Threes\s
+                     4.  Fours\s
+                     5.  Fives\s
+                     6.  Sixes\s               
+                     7.  One pair\s
+                     8.  Two pair\s
+                     9.  3 of a kind\s
+                     10. 4 of a kind\s
+                     11. Small straight\s
+                     12. Large straight\s
+                     13. Full house\s
+                     14. Chance\s
+                     15. Yatzy\s
 
-                Choices:\s""");
+                    Choices:\s""");
 
-        valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
-        valueAndCombi[1] = Integer.parseInt(input)-1;     // Combination
+            if (input > 0 && input <= 6) {
+                valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
+                valueAndCombi[1] = input - 1;     // Combination
+                validNumber = true;
+
+            } else if (input >= 7 && input <= 15) {
+                valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
+                valueAndCombi[1] = input + 1;     // Combination
+                validNumber = true;
+            } else {
+                System.out.println("\nWrong input\n");
+            }
+        }
         return valueAndCombi;
-
     }
 
 
-    private int getCombination(String input, Dice[] diceRoll, int playerID) {
+    private int getCombination(int input, Dice[] diceRoll, int playerID) {
         int output = 0;
 
         // The tempSF loads the field the player wants to add score to.
-        ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(Integer.parseInt(input)-1);
+        ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(input-1);
         // This if statement makes sure not to add the score if the field has already been used.
         if (!tempSF.isAlreadyUsed()) {
             switch (input) {
-                case "1" -> output = singles(diceRoll, 1);
-                case "2" -> output = singles(diceRoll, 2);
-                case "3" -> output = singles(diceRoll, 3);
-                case "4" -> output = singles(diceRoll, 4);
-                case "5" -> output = singles(diceRoll, 5);
-                case "6" -> output = singles(diceRoll, 6);
-                case "9" -> output = onePair(diceRoll);
-                case "10" -> output = twoPair(diceRoll);
-                case "11" -> output = nOfAKind(diceRoll, 3);
-                case "12" -> output = nOfAKind(diceRoll, 4);
-                case "13" -> output = smallStraight(diceRoll);
-                case "14" -> output = largeStraight(diceRoll);
-                case "15" -> output = fullHouse(diceRoll);
-                case "16" -> output = chance(diceRoll);
-                case "17" -> output = gotYatzy(diceRoll);
-
-
-
-
-                // TODO the rest of the combinations
-
+                case 1 -> output = singles(diceRoll, 1);
+                case 2 -> output = singles(diceRoll, 2);
+                case 3 -> output = singles(diceRoll, 3);
+                case 4 -> output = singles(diceRoll, 4);
+                case 5 -> output = singles(diceRoll, 5);
+                case 6 -> output = singles(diceRoll, 6);
+                case 7 -> output = onePair(diceRoll);
+                case 8 -> output = twoPair(diceRoll);
+                case 9 -> output = nOfAKind(diceRoll, 3);
+                case 10 -> output = nOfAKind(diceRoll, 4);
+                case 11 -> output = smallStraight(diceRoll);
+                case 12 -> output = largeStraight(diceRoll);
+                case 13 -> output = fullHouse(diceRoll);
+                case 14 -> output = chance(diceRoll);
+                case 15 -> output = gotYatzy(diceRoll);
             }
         } else {
             System.out.println("Already used");
@@ -81,7 +87,6 @@ public class Combinations {
         }
         return output;
     }
-
 
     public int singles(Dice[] diceRoll, int n) {
         int sum = 0;
@@ -126,17 +131,13 @@ public class Combinations {
 
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] == arr[j] && foundPair == false) //Finds the first pair
-                {
+                if (arr[i] == arr[j] && !foundPair) {//Finds the first pair
                     sumFirstPair = arr[i] + arr[j];
                     foundPair = true;
-
-                } else if (arr[i] == arr[j] && foundPair == true && sumFirstPair != arr[i] * 2) //Finds the second pair
-                {
+                } else if (arr[i] == arr[j] && foundPair && sumFirstPair != arr[i] * 2) { //Finds the second pair
                     sumSeconPair = arr[i] + arr[j];
                 }
                 sumTwoPair = sumFirstPair + sumSeconPair;
-
             }
         }
         if (sumTwoPair > 0 && sumSeconPair != 0) //Returns the sum of two pairs or 0 if no two pairs exist.
@@ -146,8 +147,6 @@ public class Combinations {
             return 0;
         }
     }
-
-
 
     public int nOfAKind(Dice[] diceRoll, int n) {   // n is how many kinds we are looking for.
         int[] arr = sortingDice(diceRoll);   // First it sorts the dice into how many of each value.
@@ -220,7 +219,6 @@ public class Combinations {
         return 0;
     }
 
-
     public int[] sortingDice(Dice[] unSortedDice) {
         // The dice gets sorted into separate values 1 - 6.
         int[] arr = new int[6];
@@ -233,23 +231,23 @@ public class Combinations {
 
     public int chance(Dice[] arr) {
         int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i].getValue();
+        for (Dice dice : arr) {
+            sum += dice.getValue();
         }
         return sum;
     }
 
-    public int straight(Dice[] arr) {
-        int sum = chance(arr);
-
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-
-                if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
-                    return sum;
-                }
-            }
-        }
-        return 0;
-    }
+//    public int straight(Dice[] arr) {
+//        int sum = chance(arr);
+//
+//        for (int i = 0; i < arr.length - 1; i++) {
+//            for (int j = i + 1; j < arr.length; j++) {
+//
+//                if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
+//                    return sum;
+//                }
+//            }
+//        }
+//        return 0;
+//    }
 }

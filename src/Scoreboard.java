@@ -13,7 +13,6 @@ public class Scoreboard {
 
             scoreboard[i] = new Score(players.get(i).getName());
         }
-
     }
 
     // Used in UI
@@ -55,14 +54,14 @@ public class Scoreboard {
 
         int sum = 0;
 
-        for (int i = 0; i < scoreboard.length; i++) {
+        for (Score score : scoreboard) {
 
             for (int j = 6; j < 17; j++) {
 
-                sum += scoreboard[i].getScores(j).getValue();
+                sum += score.getScores(j).getValue();
 
             }
-            scoreboard[i].setScores(17,sum);
+            score.setScores(17, sum);
             sum = 0;
         }
     }
@@ -74,7 +73,7 @@ public class Scoreboard {
     // Todo toString format. To allign the labels with the values.
     @Override
     public String toString() {
-        return "Scoreboard: [1,2,3,4,6,Sum,1pair,2pair,3kind,4kind,sStraight,bStraight,house,chance,Yatzy,Total] "
+        return "Scoreboard: [1,2,3,4,5,6,Sum,Bonus,1pair,2pair,3kind,4kind,sStraight,bStraight,house,chance,Yatzy,Total] "
                 + Arrays.toString(scoreboard);
     }
 }
