@@ -11,6 +11,7 @@ public class GameEngine {
 
     private Scoreboard scoreboard;
     private Combinations combi;
+    private int diceInput;
 
     public GameEngine() {
         fiveDice = new Dice[5];     // The game engine starts up with a random range of dice.
@@ -109,12 +110,16 @@ public class GameEngine {
                     case 1 -> {
                         System.out.println("\nTurn " + turn + ":");
                         System.out.println(Arrays.toString(fiveDice) + "\n");
-                        for (int i = 0; i < 5; i++) {
-                            String input = getUserString("Do you want to re-roll dice no. " + (i + 1) + " Y/N ");
-                            if (input.equalsIgnoreCase("y")) {
-                                changeDice(i);
-                            }
-                        }
+
+
+
+
+//                        for (int i = 0; i < 5; i++) {
+//                           String input = getUserString("Do you want to re-roll dice no. " + (i + 1) + " Y/N ");
+//                            if (input.equalsIgnoreCase("y")) {
+//                               changeDice(i);
+//                            }
+//                        }
                         turnsLeft--;
                         turn++;
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
@@ -164,13 +169,10 @@ public class GameEngine {
     }
 
     //Rewrite with for loop and use input from user -
-    public void changeDice(int diceNum) {
+    public void changeDice(Dice diceNum) {
 
-        for (int i = 0; i < 5; i++) {
-            if (diceNum == i) {
-                fiveDice[i] = new Dice();
-            }
-        }
+        diceNum.diceRoll();
+
     }
 
     public Dice[] getFiveDice() {

@@ -14,7 +14,7 @@ public class Dice {
     }
 
 
-    public static int diceRoll() {
+    public int diceRoll() {
         return(int)(Math.random()*6+1);
     }
 
