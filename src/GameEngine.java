@@ -53,10 +53,10 @@ public class GameEngine {
     public void initialMenu() {
         int menuChoice = getUserInt(
                 "Welcome to Yatzy! Make your choice: \n\n " +
-                "1. Start new game \n " +
-                "2. Highscore \n " +
-                "3. Exit \n\n " +
-                "input: ");
+                        "1. Start new game \n " +
+                        "2. Highscore \n " +
+                        "3. Exit \n\n " +
+                        "input: ");
 
         switch (menuChoice) {
             case 1 -> startNewGameMenu();
@@ -76,9 +76,19 @@ public class GameEngine {
 
     public void doTurn() { //input player object
         currentRound = 1;
-        while (true) {   // TODO: Make a game is running boolean. incase we need the ability to start a new game.
 
-            if(currentPlayer==numberOfPlayers) currentPlayer = 0;   // When the last player had his turn, currentplayer is set to player 1.
+
+        while (currentRound < numberOfRounds || currentPlayer != numberOfPlayers) {   // TODO: Make a game is running boolean. incase we need the ability to start a new game.
+
+
+            if (currentPlayer == numberOfPlayers) {  // When the last player had his turn, currentplayer is set to player 1.
+
+                currentRound++;
+                currentPlayer = 0;
+
+                System.out.println("\nCurrent round: " + currentRound);
+                System.out.println("=================");
+            }
 
             for (int i = 0; i < fiveDice.length; i++) {
                 fiveDice[i] = new Dice();
@@ -130,6 +140,8 @@ public class GameEngine {
                 }
             }
         }
+        findWinner();
+
     }
 
     public void startNewGameMenu() {
@@ -145,6 +157,30 @@ public class GameEngine {
         //Start round?
         doTurn();
     }
+
+    public void findWinner() {
+        int winnerID = 0;
+        int winnerScore = 0;
+
+        Score[] tempSB = scoreboard.getScoreboard();
+
+
+        for (int i = 0; i < tempSB.length - 1; i++) {
+
+            if (tempSB[i].getScores(17).getValue() < tempSB[i + 1].getScores(17).getValue()) {
+
+                winnerID = i + 1;
+                winnerScore = tempSB[i + 1].getScores(17).getValue();
+
+
+            } else {
+                winnerID = i;
+                winnerScore = tempSB[i].getScores(17).getValue();
+            }
+        }
+        System.out.println("\n And the winner is " + players.get(winnerID).getName() + " with " + winnerScore + " points.");
+    }
+
 
     //Takes number of players and fills players with names from input
     private void makePlayerArray(int numberOfPlayers) {

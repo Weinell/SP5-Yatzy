@@ -44,6 +44,8 @@ public class Score {
         this.scores[combination].setAlreadyUsed(true);
     }
 
+
+
     @Override
     public String toString() {
         return "\n" + nameOfPlayer + ": Score" + Arrays.toString(scores);
