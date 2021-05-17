@@ -22,10 +22,8 @@ public class Combinations {
                  3.  Threes\s
                  4.  Fours\s
                  5.  Fives\s
-                 6.  Sixes\s
-                     sum \s
-                     Bonus \s
-                 9.  One pair\s
+                 6.  Sixes\s               
+                 7.  One pair\s
                  10. Two pair\s
                  11. 3 of a kind\s
                  12. 4 of a kind\s
@@ -58,9 +56,9 @@ public class Combinations {
                 case "4" -> output = singles(diceRoll, 4);
                 case "5" -> output = singles(diceRoll, 5);
                 case "6" -> output = singles(diceRoll, 6);
+                case "7" -> output = onePair(diceRoll);
 
                 // TODO the rest of the combinations
-
 
             }
         } else {
@@ -71,6 +69,26 @@ public class Combinations {
             scoreboard.addPoints(playerID, valueAndCombi);
         }
         return output;
+    }
+
+    public int onePair(Dice[] diceRoll) {
+        int[] tempArr = new int[5];
+        for (int k = 0; k < diceRoll.length; k++) {
+            tempArr[k] = diceRoll[k].getValue();
+        }
+
+//Sorting the dice array
+        Arrays.sort(tempArr);
+
+//Looking for the highest pair
+        for (int i = tempArr.length - 1; i > 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (tempArr[i] == tempArr[j]) {
+                    return tempArr[i]*2;
+                }
+            }
+        }
+        return 0;
     }
 
     public int singles(Dice[] diceRoll, int n) {
@@ -164,23 +182,7 @@ public class Combinations {
         return arr;
     }
 
-    public int onePair(int[] arr) {
-        int[] tempArr = new int[5];
-        tempArr = arr;
 
-//Sorting the dice array
-        Arrays.sort(tempArr);
-
-//Looking for the highest pair
-        for (int i = tempArr.length - 1; i > 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (arr[i] == arr[j]) {
-                    return arr[i] + arr[j];
-                }
-            }
-        }
-        return 0;
-    }
 
 
     public int twoPair(int[] arr) {
