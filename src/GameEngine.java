@@ -187,7 +187,7 @@ public class GameEngine {
             //fiveDice[diceNumToChange-1] = new Dice();
             fiveDice[diceNumToChange-1].setValue(Dice.diceRoll());
         }
-        turnsLeft = 0;
+        turnsLeft--;
     }
 
 
