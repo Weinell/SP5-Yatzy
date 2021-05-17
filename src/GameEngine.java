@@ -171,7 +171,7 @@ public class GameEngine {
     private int userChangeNumDice ()
     {
         int numberOfDiceToChange = getUserInt("How many dice do you want to change?");
-        if(numberOfDiceToChange > 5 && numberOfDiceToChange < 1)
+        if(numberOfDiceToChange > 5 && numberOfDiceToChange < 0)
         {
             System.out.println("Number has to be within 1-5");
             numberOfDiceToChange = getUserInt("How many dice do you want to change?");
