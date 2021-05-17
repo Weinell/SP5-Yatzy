@@ -99,7 +99,7 @@ public class GameEngine {
 
             int turn = 1;   // Resets to this default each player round.
             turnsLeft = 2;  // Makes sure player can only roll three times.
-            while (turnsLeft != 0) {
+            while (turnsLeft > 0) {
                 System.out.println("\n" + players.get(currentPlayer).getName() + " turn:");
 
                 switch (getUserInt("\n" +
