@@ -124,7 +124,7 @@ public class GameEngine {
                         }
 
 
-                        if (turnsLeft == 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
+                        if (turnsLeft <= 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
                             valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.
                             scoreboard.addPoints(currentPlayer, valueAndCombi);
                             System.out.println(scoreboard);
@@ -198,11 +198,13 @@ public class GameEngine {
     private int userChangeNumDice ()
     {
         int numberOfDiceToChange = getUserInt("How many dice do you want to change? If you wish to save your current rolls, press '0'");
-        if(numberOfDiceToChange > 5 || numberOfDiceToChange < 1)
+
+        if (numberOfDiceToChange == 0)  {
+            turnsLeft = -1;
+            numberOfDiceToChange = 0;
+        }
+        else if(numberOfDiceToChange > 5 || numberOfDiceToChange < 0)
         {
-            if (numberOfDiceToChange == 0)  {
-                return turnsLeft = 0;
-            }
             System.out.println("Number has to be within 1-5");
             numberOfDiceToChange = getUserInt("How many dice do you want to change? If you wish to save your current rolls, press '0'");
         }
