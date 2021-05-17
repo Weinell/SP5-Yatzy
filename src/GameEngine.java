@@ -21,13 +21,18 @@ public class GameEngine {
 
     }
 
+
     // TODO: maybe move to a UI class?
 //User Input
-    public int getUserInt(String msg) {
+    public static int getUserInt(String msg) {
         System.out.print(msg);
         Scanner scan = new Scanner(System.in);
-        int input = scan.nextInt();
-        return input;
+        while (!scan.hasNextInt()) {
+            System.out.println("Wrong input");
+            System.out.print(msg);
+            scan.nextLine();
+        }
+        return scan.nextInt();
     }
 
     public String getUserString(String msg) {
@@ -44,7 +49,13 @@ public class GameEngine {
     // TODO: Make sure the game doesnt crash when we use char input instead of int. And vice versa.
     //Initial menu presented to player
     public void initialMenu() {
-        int menuChoice = getUserInt("Welcome to Yatzy! Make your choice: \n\n 1. Start new game \n 2. Continue game \n 3. Exit \n 4. Roll Dice\n\ninput: ");
+        int menuChoice = getUserInt(
+                "Welcome to Yatzy! Make your choice: \n\n " +
+                "1. Start new game \n " +
+                "2. Continue game \n " +
+                "3. Exit \n " +
+                "4. Roll Dice\n\n" +
+                "input: ");
 
         switch (menuChoice) {
             case 1:
@@ -85,7 +96,7 @@ public class GameEngine {
             int[] valueAndCombi;  // Used for adding the score to the board. Smart way to send two integers in the same variable.
 
             int turn = 1;   // Resets to this default each player round.
-            int turnsLeft = 3;  // Makes sure player can only roll three times.
+            int turnsLeft = 2;  // Makes sure player can only roll three times.
             while (turnsLeft != 0) {
                 System.out.println("\n" + players.get(currentPlayer).getName() + " turn:");
 
@@ -107,7 +118,7 @@ public class GameEngine {
                         turnsLeft--;
                         turn++;
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
-                        System.out.println("Turnsleft: " + turnsLeft);
+                        System.out.println("Rolls left: " + turnsLeft);
 
                         if (turnsLeft == 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
                             valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.

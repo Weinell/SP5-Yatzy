@@ -36,14 +36,17 @@ public class Scoreboard {
 
         int sum = 0;
 
-        for (int i = 0; i < scoreboard.length; i++) {
+        for (int i = 0; i < scoreboard.length; i++) {   // Number of players
 
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 6; j++) {       // Number of combinations from 1 - 6.
 
                 sum += scoreboard[i].getScores(j).getValue();
 
             }
             scoreboard[i].setScores(6,sum);
+
+            if(sum >= 63) scoreboard[i].setScores(7,50);  // set the bonus field to 50.
+
             sum = 0;
         }
     }
