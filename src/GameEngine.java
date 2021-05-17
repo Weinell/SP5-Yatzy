@@ -8,6 +8,7 @@ public class GameEngine {
     private static final ArrayList<Player> players = new ArrayList<>();
 
     private int numberOfPlayers, currentPlayer; // Needed to determind whom turn it is and whom to added the right scores to.
+    private int numberOfRounds, currentRound;
 
     private Scoreboard scoreboard;
     private Combinations combi;
@@ -18,6 +19,7 @@ public class GameEngine {
             fiveDice[i] = new Dice();
         }
         currentPlayer = 0;  // Always sets it to the first player in the array when starting a new game.
+        numberOfRounds = 15;
 
     }
 
@@ -52,29 +54,18 @@ public class GameEngine {
         int menuChoice = getUserInt(
                 "Welcome to Yatzy! Make your choice: \n\n " +
                 "1. Start new game \n " +
-                "2. Continue game \n " +
-                "3. Exit \n " +
-                "4. Roll Dice\n\n" +
+                "2. Highscore \n " +
+                "3. Exit \n\n " +
                 "input: ");
 
         switch (menuChoice) {
-            case 1:
-                System.out.println("\nStart new game");
-                startNewGameMenu();
-                break;
-            case 2:
-                System.out.println("Continue game"); //TODO Make IO and save player highscore
-                break;
-            case 3:
-                System.out.println("Exit"); // Exist gameloop
-                break;
-            case 4:
-
-                System.out.println(Arrays.toString(fiveDice));
-                break;
-            default:
+            case 1 -> startNewGameMenu();
+            case 2 -> System.out.println("Continue game"); //TODO Make IO and save player highscore
+            case 3 -> System.out.println("Exit"); // Exist gameloop
+            default -> {
                 System.out.println("Input not understood, please try again");
                 initialMenu();
+            }
         }
     }
 
@@ -83,8 +74,8 @@ public class GameEngine {
     //re-roll the amount of dice
     //
 
-    public void doTurn() //input player object
-    {
+    public void doTurn() { //input player object
+        currentRound = 1;
         while (true) {   // TODO: Make a game is running boolean. incase we need the ability to start a new game.
 
             if(currentPlayer==numberOfPlayers) currentPlayer = 0;   // When the last player had his turn, currentplayer is set to player 1.
@@ -142,6 +133,7 @@ public class GameEngine {
     }
 
     public void startNewGameMenu() {
+        System.out.println("\nStart new game");
         //Get number of players
         //get names of players
         int numbPlayers = getUserInt("Enter number of players: ");
