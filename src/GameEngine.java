@@ -118,7 +118,10 @@ public class GameEngine {
                         turn++;
 
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
-                        System.out.println("Rolls left: " + turnsLeft);
+                        if (turnsLeft > 0)  {
+                            System.out.println("Rolls left: " + turnsLeft);
+                        }
+
 
                         if (turnsLeft == 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
                             valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.
@@ -184,24 +187,20 @@ public class GameEngine {
         int num = userChangeNumDice();
         for (int i = 0; i < num; i++) {
             int diceNumToChange = getUserInt("What dice do you want to change?");
-            //fiveDice[diceNumToChange-1] = new Dice();
             fiveDice[diceNumToChange-1].setValue(Dice.diceRoll());
         }
         turnsLeft--;
-        if (turnsLeft == -1)    {
-            turnsLeft = 0;
-        }
     }
 
 
-    public void changeDice(int diceNum) {
-
-        for (int i = 0; i < 5; i++) {
-            if (diceNum == i) {
-                fiveDice[i].setValue(Dice.diceRoll());
-            }
-        }
-    }
+//    public void changeDice(int diceNum) {
+//
+//        for (int i = 0; i < 5; i++) {
+//            if (diceNum == i) {
+//                fiveDice[i].setValue(Dice.diceRoll());
+//            }
+//        }
+//    }
 
     public Dice[] getFiveDice() {
         return fiveDice;
