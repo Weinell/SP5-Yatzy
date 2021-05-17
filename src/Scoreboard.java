@@ -74,7 +74,7 @@ public class Scoreboard {
     // Todo toString format. To allign the labels with the values.
     @Override
     public String toString() {
-        return "Scoreboard: [1,2,3,4,6,Sum,1pair,2pair,3kind,4kind,sStraight,bStraight,house,chance,Yatzy,Total] "
+        return "Scoreboard: [1,2,3,4,5,6,Sum,Bonus,1pair,2pair,3kind,4kind,sStraight,bStraight,house,chance,Yatzy,Total] "
                 + Arrays.toString(scoreboard);
     }
 }
