@@ -85,12 +85,13 @@ public class GameEngine {
         turn = 1;   // Resets to this default each player round.
         turnsLeft = 2;  // Makes sure player can only roll three times.
         while (turnsLeft > 0) {
-            System.out.println("\n" + players.get(currentPlayer).getName() + " turn:");
+            System.out.println("\nPlayer: " + players.get(currentPlayer).getName());
+            System.out.println("Turn " + turn + ":");
 
             switch (messageDoTurn()) {
                 case 1 -> rollDiceDuringTurn();
                 case 2 -> addScoreDuringTurn();
-                case 3 -> System.out.println(scoreboard);
+                case 3 -> printScoreboard();
             }
         }
     }
@@ -105,13 +106,13 @@ public class GameEngine {
     }
 
     public void rollDiceDuringTurn() {
-        System.out.println("\nTurn " + turn + ":");
+
 
         changeNumberOfDiceArray(fiveDice);
 
         turn++;
 
-        System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
+        if (turn!=3) System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
 
         if (turnsLeft <= 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
             valueAndCombi = combi.eventCombination(fiveDice, currentPlayer); // This starts a long chain of code, to add score to the proper field.
@@ -128,6 +129,12 @@ public class GameEngine {
         System.out.println(scoreboard);
         turnsLeft = 0;
         currentPlayer++;
+    }
+
+    public void printScoreboard() {
+        scoreboard.subSum();
+        scoreboard.totalSum();
+        System.out.println(scoreboard);
     }
 
     public void findWinner() {

@@ -48,6 +48,7 @@ public class Score {
 
     @Override
     public String toString() {
-        return "\n" + nameOfPlayer + ": Score" + Arrays.toString(scores);
+        return "\n" + String.format("%10s",nameOfPlayer) + ": Score" + Arrays.toString(scores);
+        //return "\n" + nameOfPlayer + ": Score" + Arrays.toString(scores);
     }
 }

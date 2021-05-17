@@ -16,25 +16,18 @@ public class Combinations {
         boolean validNumber = false;
         while(!validNumber) {
             System.out.println(Arrays.toString(gameEngine.getFiveDice()));
-            System.out.println("\nWhat do you wish to do? ");
+            System.out.println("\nAdd your points: ");
             int input = gameEngine.getUserInt("""
 
-                     1.  Aces\s
-                     2.  Twos\s
-                     3.  Threes\s
-                     4.  Fours\s
-                     5.  Fives\s
-                     6.  Sixes\s               
-                     7.  One pair\s
+                     1.  Aces               9.  3 of a kind\s
+                     2.  Twos               10. 4 of a kind\s
+                     3.  Threes             11. Small straight\s
+                     4.  Fours              12. Large straight\s
+                     5.  Fives              13. Full house\s
+                     6.  Sixes              14. Chance\s               
+                     7.  One pair           15. Yatzy\s
                      8.  Two pair\s
-                     9.  3 of a kind\s
-                     10. 4 of a kind\s
-                     11. Small straight\s
-                     12. Large straight\s
-                     13. Full house\s
-                     14. Chance\s
-                     15. Yatzy\s
-
+                    
                     Choices:\s""");
 
             if (input > 0 && input <= 6) {
@@ -42,7 +35,7 @@ public class Combinations {
                 valueAndCombi[1] = input - 1;     // Combination
                 validNumber = true;
 
-            } else if (input >= 7 && input <= 15) {
+            } else if (input >= 7 && input <= 15) {   // Had to make this, because field 7 and 8 is subsum and bonus.
                 valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
                 valueAndCombi[1] = input + 1;     // Combination
                 validNumber = true;
@@ -56,10 +49,16 @@ public class Combinations {
 
     private int getCombination(int input, Dice[] diceRoll, int playerID) {
         int output = 0;
+        ScoreboardField tempSF = null;
 
         // The tempSF loads the field the player wants to add score to.
-        ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(input-1);
+        if (input > 0 && input <= 6) {
+            tempSF = scoreboard.getScoreboard()[playerID].getScores(input - 1);
+        }  else if (input >= 7 && input <= 15) {
+            tempSF = scoreboard.getScoreboard()[playerID].getScores(input + 1);
+        }
         // This if statement makes sure not to add the score if the field has already been used.
+        assert tempSF != null;
         if (!tempSF.isAlreadyUsed()) {
             switch (input) {
                 case 1 -> output = singles(diceRoll, 1);

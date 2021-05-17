@@ -26,7 +26,11 @@ public class ScoreboardField {
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        String indicator = " ";
+        if(alreadyUsed) {
+            indicator = "X";
+        }
+        return indicator + String.format("%5s",value);
     }
 
 
