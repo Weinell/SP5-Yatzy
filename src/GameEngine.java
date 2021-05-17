@@ -182,12 +182,15 @@ public class GameEngine {
     public void changeNumberOfDiceArray(Dice [] diceArray)
     {
         int num = userChangeNumDice();
-        for (int i = 0; i <num; i++) {
+        for (int i = 0; i < num; i++) {
             int diceNumToChange = getUserInt("What dice do you want to change?");
             //fiveDice[diceNumToChange-1] = new Dice();
             fiveDice[diceNumToChange-1].setValue(Dice.diceRoll());
         }
-        turnsLeft = 0;
+        turnsLeft--;
+        if (turnsLeft == -1)    {
+            turnsLeft = 0;
+        }
     }
 
 
