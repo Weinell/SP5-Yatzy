@@ -3,53 +3,75 @@ import java.util.Arrays;
 public class Combinations {
 
     private GameEngine gameEngine;
+    private Scoreboard scoreboard;
+    int[] valueAndCombi;
 
-    public Combinations(GameEngine gameEngine) {
+    public Combinations(GameEngine gameEngine, Scoreboard scoreboard) {
         this.gameEngine = gameEngine;
+        this.scoreboard = scoreboard;
+        this.valueAndCombi = new int[2];  // This way you can return different values in the same return methode
     }
 
-    public int[] eventCombination(Dice[] diceRoll) {
-        int[] valueAndCombi = new int[2];
-
+    public int[] eventCombination(Dice[] diceRoll, int playerID) {
         System.out.println(Arrays.toString(gameEngine.getFiveDice()));
         System.out.println("\nWhat do you wish to do? ");
-        String input = gameEngine.getUserString("\n" +
-                "1) Aces " + "\n" +
-                "2) Twos " + "\n" +
-                "3) Threes " + "\n" +
-                "4) Fours " + "\n" +
-                "5) Fives " + "\n" +
-                "6) Sixes " + "\n" +
+        String input = gameEngine.getUserString("""
 
+                 1.  Aces\s
+                 2.  Twos\s
+                 3.  Threes\s
+                 4.  Fours\s
+                 5.  Fives\s
+                 6.  Sixes\s
+                     sum \s
+                     Bonus \s
+                 9.  One pair\s
+                 10. Two pair\s
+                 11. 3 of a kind\s
+                 12. 4 of a kind\s
+                 13. Small straight\s
+                 14. Large straight\s
+                 15. Full house\s
+                 16. Chance\s
+                 17. Yatzy\s
 
-                "\nChoose action: ");
-        System.out.println("\n======================================\n");
-        valueAndCombi[0] = getCombination(input, diceRoll);
-        valueAndCombi[1] = Integer.parseInt(input)-1;
+                Choices:\s""");
+
+        valueAndCombi[0] = getCombination(input, diceRoll, playerID);   // Value
+        valueAndCombi[1] = Integer.parseInt(input)-1;     // Combination
         return valueAndCombi;
 
     }
 
 
-    private int getCombination(String input, Dice[] diceRoll) {
+    private int getCombination(String input, Dice[] diceRoll, int playerID) {
         int output = 0;
-        switch (input) {
-            case "1" -> output = singles(diceRoll, 1);
-            case "2" -> output = singles(diceRoll, 2);
-            case "3" -> output = singles(diceRoll, 3);
-            case "4" -> output = singles(diceRoll, 4);
-            case "5" -> output = singles(diceRoll, 5);
-            case "6" -> output = singles(diceRoll, 6);
+
+        // The tempSF loads the field the player wants to add score to.
+        ScoreboardField tempSF = scoreboard.getScoreboard()[playerID].getScores(Integer.parseInt(input)-1);
+        // This if statement makes sure not to add the score if the field has already been used.
+        if (!tempSF.isAlreadyUsed()) {
+            switch (input) {
+                case "1" -> output = singles(diceRoll, 1);
+                case "2" -> output = singles(diceRoll, 2);
+                case "3" -> output = singles(diceRoll, 3);
+                case "4" -> output = singles(diceRoll, 4);
+                case "5" -> output = singles(diceRoll, 5);
+                case "6" -> output = singles(diceRoll, 6);
+
+                // TODO the rest of the combinations
 
 
+            }
+        } else {
+            System.out.println("Already used");
+            output = tempSF.getValue();
+
+            valueAndCombi = eventCombination(diceRoll, playerID);
+            scoreboard.addPoints(playerID, valueAndCombi);
         }
         return output;
     }
-
-
-
-
-
 
     public int singles(Dice[] diceRoll, int n) {
         int sum = 0;

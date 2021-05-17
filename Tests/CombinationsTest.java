@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CombinationsTest {
-    Combinations comb = new Combinations(null);
+    Combinations comb = new Combinations(null, null);
     int [] testSmallStraightPass = {1,2,3,4,5}; //Return 15
     int [] testLargeStraightPass = {6,2,3,4,5}; // Return 20
     int [] testOnePairPass = {1,5,4,3,1}; //Sum 2;

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,7 +20,7 @@ public class Scoreboard {
     public void addPoints(int playerID, int[] valueAndCombi) {
 
         scoreboard[playerID].setScores(valueAndCombi[1], valueAndCombi[0]);
-        subSum();
+        subSum();  // Everytime a value is added to a field, we want the game to update the sub and total sum.
         totalSum();
     }
 
@@ -37,18 +36,20 @@ public class Scoreboard {
 
         int sum = 0;
 
-        for (int i = 0; i < scoreboard.length; i++) {
+        for (int i = 0; i < scoreboard.length; i++) {   // Number of players
 
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 6; j++) {       // Number of combinations from 1 - 6.
 
-                sum += scoreboard[i].getScores(j);
+                sum += scoreboard[i].getScores(j).getValue();
 
             }
             scoreboard[i].setScores(6,sum);
+
+            if(sum >= 63) scoreboard[i].setScores(7,50);  // set the bonus field to 50.
+
             sum = 0;
         }
     }
-
 
     public void totalSum()    {
 
@@ -58,7 +59,7 @@ public class Scoreboard {
 
             for (int j = 6; j < 17; j++) {
 
-                sum += scoreboard[i].getScores(j);
+                sum += scoreboard[i].getScores(j).getValue();
 
             }
             scoreboard[i].setScores(17,sum);
@@ -66,18 +67,14 @@ public class Scoreboard {
         }
     }
 
-
-
     public Score[] getScoreboard() {
         return scoreboard;
     }
 
-    public void setScoreboard(Score[] scoreboard) {
-        this.scoreboard = scoreboard;
-    }
-
+    // Todo toString format. To allign the labels with the values.
     @Override
     public String toString() {
-        return "Scoreboard:"+ Arrays.toString(scoreboard);
+        return "Scoreboard: [1,2,3,4,6,Sum,1pair,2pair,3kind,4kind,sStraight,bStraight,house,chance,Yatzy,Total] "
+                + Arrays.toString(scoreboard);
     }
 }
