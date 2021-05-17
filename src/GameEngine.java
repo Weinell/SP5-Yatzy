@@ -109,12 +109,16 @@ public class GameEngine {
                     case 1 -> {
                         System.out.println("\nTurn " + turn + ":");
                         System.out.println(Arrays.toString(fiveDice) + "\n");
-                        for (int i = 0; i < 5; i++) {
-                            String input = getUserString("Do you want to re-roll dice no. " + (i + 1) + " Y/N ");
-                            if (input.equalsIgnoreCase("y")) {
-                                changeDice(i);
-                            }
-                        }
+                        changeNumberOfDiceArray(fiveDice);
+
+
+
+//                        for (int i = 0; i < 5; i++) {
+//                            String input = getUserString("Do you want to re-roll dice no. " + (i + 1) + " Y/N ");
+//                            if (input.equalsIgnoreCase("y")) {
+//                                changeDice(i);
+//                            }
+//                        }
                         turnsLeft--;
                         turn++;
                         System.out.println("\nNew dice: " + Arrays.toString(fiveDice));
@@ -163,12 +167,34 @@ public class GameEngine {
         }
     }
 
-    //Rewrite with for loop and use input from user -
+    //Takes user input and changes a specific number of dice
+    private int userChangeNumDice ()
+    {
+        int numberOfDiceToChange = getUserInt("How many dice do you want to change?");
+        if(numberOfDiceToChange > 5 && numberOfDiceToChange < 1)
+        {
+            System.out.println("Number has to be within 1-5");
+            numberOfDiceToChange = getUserInt("How many dice do you want to change?");
+        }
+        return numberOfDiceToChange;
+    }
+
+    //Loop runs the number of times the user wants to change a dice - Changed method to only change value of dice instead of calling a Dice object.
+    public void changeNumberOfDiceArray(Dice [] diceArray)
+    {
+        int num = userChangeNumDice();
+        for (int i = 0; i <num; i++) {
+            int diceNumToChange = getUserInt("What dice do you want to change?");
+            //fiveDice[diceNumToChange-1] = new Dice();
+            fiveDice[diceNumToChange-1].setValue(Dice.diceRoll());
+        }
+    }
+
     public void changeDice(int diceNum) {
 
         for (int i = 0; i < 5; i++) {
             if (diceNum == i) {
-                fiveDice[i] = new Dice();
+                fiveDice[i].setValue(Dice.diceRoll());
             }
         }
     }
