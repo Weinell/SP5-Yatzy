@@ -1,10 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class UI implements DisplaySource{
+public class UI implements DisplaySource {
     private GameEngine gameEngine;
-    public UI (GameEngine gameEngine)
-    {
+
+    public UI(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
 
@@ -14,8 +14,7 @@ public class UI implements DisplaySource{
     }
 
     //Initial menu presented to player
-    public void initialMenu()
-    {
+    public void initialMenu() {
         int menuChoice = getUserInt(
                 "Welcome to Yatzy! Make your choice: \n\n " +
                         "1. Start new game \n " +
@@ -98,7 +97,7 @@ public class UI implements DisplaySource{
 
         gameEngine.turn++;
 
-        if (gameEngine.turn!=3) System.out.println("\nNew dice: " + Arrays.toString(gameEngine.fiveDice));
+        if (gameEngine.turn != 3) System.out.println("\nNew dice: " + Arrays.toString(gameEngine.fiveDice));
 
         if (gameEngine.turnsLeft <= 0) { // If the player uses all his rolls, the game automatically ask the player to add the value to the scoreboard.
             gameEngine.valueAndCombi = gameEngine.combi.eventCombination(gameEngine.fiveDice, gameEngine.currentPlayer); // This starts a long chain of code, to add score to the proper field.
@@ -123,19 +122,22 @@ public class UI implements DisplaySource{
         System.out.println(gameEngine.scoreboard);
     }
 
+
     public void findWinner() {
         int winnerID = 0;
         int winnerScore = 0;
-
         Score[] tempSB = gameEngine.scoreboard.getScoreboard();
-
-        for (int i = 0; i < tempSB.length - 1; i++) {
-            if (tempSB[i].getScores(17).getValue() < tempSB[i + 1].getScores(17).getValue()) {
-                winnerID = i + 1;
-                winnerScore = tempSB[i + 1].getScores(17).getValue();
-            } else {
-                winnerID = i;
-                winnerScore = tempSB[i].getScores(17).getValue();
+        if (gameEngine.numberOfPlayers == 1) {
+            winnerScore = tempSB[0].getScores(17).getValue();
+        } else {
+            for (int i = 0; i < tempSB.length - 1; i++) {
+                if (tempSB[i].getScores(17).getValue() < tempSB[i + 1].getScores(17).getValue()) {
+                    winnerID = i + 1;
+                    winnerScore = tempSB[i + 1].getScores(17).getValue();
+                } else {
+                    winnerID = i;
+                    winnerScore = tempSB[i].getScores(17).getValue();
+                }
             }
         }
         System.out.println("\n And the winner is " + gameEngine.players.get(winnerID).getName() +
