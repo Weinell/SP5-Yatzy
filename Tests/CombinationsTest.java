@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Update tests to take a Dice object instead of an array
+
 class CombinationsTest {
     Combinations comb = new Combinations(null, null);
     int [] testSmallStraightPass = {1,2,3,4,5}; //Return 15
@@ -41,6 +43,7 @@ class CombinationsTest {
         assertEquals(18, testPass2); //Return 18
     }
 
+    //Test updated straight methods
 
     @Test
     void smallStraight() {
