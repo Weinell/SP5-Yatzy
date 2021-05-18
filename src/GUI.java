@@ -1,6 +1,6 @@
-public class GUI {
+public class GUI implements DisplaySource{
+    @Override
+    public void updateGame() {
 
-
-
-
+    }
 }

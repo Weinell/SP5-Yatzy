@@ -1,12 +1,18 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class UI {
+public class UI implements DisplaySource{
     private GameEngine gameEngine;
     public UI (GameEngine gameEngine)
     {
         this.gameEngine = gameEngine;
     }
+
+    @Override
+    public void updateGame() {
+        initialMenu();
+    }
+
     //Initial menu presented to player
     public void initialMenu()
     {
@@ -154,4 +160,6 @@ public class UI {
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
     }
+
+
 }
