@@ -6,23 +6,23 @@ public class GameEngine {
     private DisplaySource displaySource;
 
     protected final Dice[] fiveDice;  // Moved fiveDice from the class to Game Engine. So we can make new dice objects.
-    protected static final ArrayList<Player> players = new ArrayList<>();
+    protected final ArrayList<Player> players = new ArrayList<>();
 
     protected int numberOfPlayers, currentPlayer, numberOfRounds, currentRound;
 
-    int[] valueAndCombi;  // Used for adding the score to the board. Smart way to send two integers in the same variable.
+    protected int[] valueAndCombi;  // Used for adding the score to the board. Smart way to send two integers in the same variable.
 
     protected Scoreboard scoreboard;
     protected Combinations combi;
     protected int turnsLeft, turn;
 
     //Via the DisplaySource interface we can choose to utilize the UI or the GUI
-    enum Displaytype{
+    enum DisplayType{
         UI,
         GUI
     }
 
-    private static Displaytype dt = Displaytype.UI;
+    private static DisplayType dt = DisplayType.UI;
 
     public GameEngine() {
         fiveDice = new Dice[5];     // The game engine starts up with a random range of dice.
@@ -39,11 +39,11 @@ public class GameEngine {
     }
 
     public DisplaySource getDisplayType () {
-        if (dt == Displaytype.UI){
+        if (dt == DisplayType.UI){
             return new UI(this);
-        } else if (dt == Displaytype.GUI)
+        } else if (dt == DisplayType.GUI)
         {
-            return new GUI();
+            return new GUI(this);
         }
         return null;
     }
@@ -84,9 +84,7 @@ public class GameEngine {
         }
         turnsLeft--;
     }
-
-
-
+    
     public Dice[] getFiveDice() {
         return fiveDice;
     }
