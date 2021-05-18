@@ -25,6 +25,7 @@ public class GameEngine {
     private static DisplayType dt = DisplayType.UI;
 
     public GameEngine() {
+
         fiveDice = new Dice[5];     // The game engine starts up with a random range of dice.
         for (int i = 0; i < fiveDice.length; i++) {
             fiveDice[i] = new Dice();
@@ -32,10 +33,29 @@ public class GameEngine {
         currentPlayer = 0;  // Always sets it to the first player in the array when starting a new game.
         numberOfRounds = 15;
         displayGame();
+
     }
 
-    public void displayGame (){
+    public void displayGame () {
+        String message = """
+
+                Choose display type:\s
+                1. UI   (Console User Interface)\s
+                2. GUI  (Graphical User Interface)\s
+
+                input:\s""";
+
+        int input = UI.getUserInt(message);
+        if (input == 1) {
+            dt = DisplayType.UI;
+        } else if (input == 2) {
+            dt = DisplayType.GUI;
+        } else {
+            System.out.println("Wrong input.\n");
+            displayGame();
+        }
         displaySource = getDisplayType();
+        System.out.println("\nDisplay set to: " + dt + "\n");
     }
 
     public DisplaySource getDisplayType () {
@@ -84,7 +104,7 @@ public class GameEngine {
         }
         turnsLeft--;
     }
-    
+
     public Dice[] getFiveDice() {
         return fiveDice;
     }

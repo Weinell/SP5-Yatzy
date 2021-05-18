@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class Combinations {
 
-    private GameEngine gameEngine;
-    private Scoreboard scoreboard;
+    private final GameEngine gameEngine;
+    private final Scoreboard scoreboard;
     int[] valueAndCombi;
 
     public Combinations(GameEngine gameEngine, Scoreboard scoreboard) {
@@ -45,7 +45,6 @@ public class Combinations {
         }
         return valueAndCombi;
     }
-
 
     private int getCombination(int input, Dice[] diceRoll, int playerID) {
         int output = 0;
@@ -227,7 +226,6 @@ public class Combinations {
         return arr;
     }
 
-
     public int chance(Dice[] arr) {
         int sum = 0;
         for (Dice dice : arr) {
@@ -235,18 +233,4 @@ public class Combinations {
         }
         return sum;
     }
-
-//    public int straight(Dice[] arr) {
-//        int sum = chance(arr);
-//
-//        for (int i = 0; i < arr.length - 1; i++) {
-//            for (int j = i + 1; j < arr.length; j++) {
-//
-//                if (arr[i] != arr[j] && (sum == 15 || sum == 20)) {
-//                    return sum;
-//                }
-//            }
-//        }
-//        return 0;
-//    }
 }

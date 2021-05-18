@@ -16,7 +16,6 @@ public class GamePanel extends GUIPanel {
     public void setupPanel() {
         this.setBackground(Color.white);
         this.setBounds(400, 400, 500, 200);
-//        this.setLayout(new BorderLayout());
         test = new JLabel("GameBoard Panel");
         this.add(test);
     }
@@ -31,3 +30,4 @@ public class GamePanel extends GUIPanel {
 
     }
 }
+

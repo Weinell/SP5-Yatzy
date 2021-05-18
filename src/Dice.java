@@ -40,7 +40,6 @@ public class Dice extends JLabel {
         }
     }
 
-
     public static int diceRoll() {
         return(int)(Math.random()*6+1);
     }

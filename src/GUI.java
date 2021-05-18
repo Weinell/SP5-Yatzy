@@ -5,10 +5,11 @@ public class GUI extends JFrame implements DisplaySource{
     private GameEngine gameEngine;
 
     private GUIPanel scoreboardPanel, dicePanel, gamePanel;
-    private int currentScore = 0;
+    private int currentScore;
 
     public GUI(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
+        currentScore = 0;
         dicePanel = new DicePanel(gameEngine, this);
         scoreboardPanel = new ScoreboardPanel(this);
         gamePanel = new GamePanel(this);
@@ -41,6 +42,7 @@ public class GUI extends JFrame implements DisplaySource{
     public void updateGame() {
         dicePanel.updatePanel();
         scoreboardPanel.updatePanel();
+
     }
 
 

@@ -11,6 +11,9 @@ public class ScoreboardPanel extends GUIPanel {
 
     public ScoreboardPanel(GUI gui) {
         this.gui = gui;
+
+
+        test = new JLabel();
         setupPanel();
     }
 
@@ -20,17 +23,11 @@ public class ScoreboardPanel extends GUIPanel {
         this.setBounds(0, 0, 400, 600);
 
         addScoreFields();
-
-
     }
 
     @Override
     public void updatePanel() {
         this.removeAll();
-
-
-//        test.setText("Current score: " + gui.getCurrentScore());
-//        this.add(test);
 
         addScoreFields();
 
@@ -44,11 +41,12 @@ public class ScoreboardPanel extends GUIPanel {
 
     public void addScoreFields() {
 
+        test.setText("Scoreboard");
 
+        this.add(test);
 
 
         this.setVisible(true);
 
     }
-
 }
