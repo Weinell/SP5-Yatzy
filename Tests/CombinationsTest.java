@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 //Update tests to take a Dice object instead of an array
 
 class CombinationsTest {
+    Dice d1 = new Dice(4);
     Combinations comb = new Combinations(null, null);
-    int [] testSmallStraightPass = {1,2,3,4,5}; //Return 15
+    Dice [] testSmallStraightPass = {new Dice(3), new Dice(),new Dice(),new Dice(),new Dice()}; //Return 15
     int [] testLargeStraightPass = {6,2,3,4,5}; // Return 20
     int [] testOnePairPass = {1,5,4,3,1}; //Sum 2;
     int [] testFailArray = {1,2,5,4,6}; // Return 0 (Chance returns 18)
