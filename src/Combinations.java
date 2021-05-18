@@ -17,7 +17,7 @@ public class Combinations {
         while(!validNumber) {
             System.out.println(Arrays.toString(gameEngine.getFiveDice()));
             System.out.println("\nAdd your points: ");
-            int input = gameEngine.getUserInt("""
+            int input = UI.getUserInt("""
 
                      1.  Aces               9.  3 of a kind\s
                      2.  Twos               10. 4 of a kind\s
