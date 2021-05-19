@@ -84,8 +84,8 @@ class CombinationsTest {
         diceTestSmallStraightPass[2] = new Dice(3,false);
         diceTestSmallStraightPass[3] = new Dice(5,false);
         diceTestSmallStraightPass[4] = new Dice(5,false);
-        int testFailSmall = comb.smallStraight(diceTestSmallStraightPass);
-        assertEquals(0, testFailSmall);
+        int testFail = comb.smallStraight(diceTestSmallStraightPass);
+        assertEquals(0, testFail);
     }
 
     @Test
